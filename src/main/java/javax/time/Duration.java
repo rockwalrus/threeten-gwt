@@ -93,7 +93,7 @@ public final class Duration
     /**
      * Constant for nanos per second.
      */
-    private static final int NANOS_PER_SECOND = 1000_000_000;
+    private static final int NANOS_PER_SECOND = 1000000000;
     /**
      * Constant for nanos per second.
      */
@@ -163,7 +163,7 @@ public final class Duration
             mos += 1000;
             secs--;
         }
-        return create(secs, mos * 1000_000);
+        return create(secs, mos * 1000000);
     }
 
     //-----------------------------------------------------------------------
@@ -357,7 +357,9 @@ public final class Duration
             }
             return negative ? ofSeconds(secs, -nanos) : create(secs, nanos);
 
-        } catch (ArithmeticException | NumberFormatException ex) {
+        } catch (ArithmeticException  ex) {
+            throw new DateTimeParseException("Duration could not be parsed: " + text, text, 2, ex);
+        } catch (NumberFormatException ex) {
             throw new DateTimeParseException("Duration could not be parsed: " + text, text, 2, ex);
         }
     }
@@ -508,7 +510,7 @@ public final class Duration
         if (unit instanceof ChronoUnit) {
             switch ((ChronoUnit) unit) {
                 case NANOS: return plusNanos(amountToAdd);
-                case MICROS: return plusSeconds((amountToAdd / (1000_000L * 1000)) * 1000).plusNanos((amountToAdd % (1000_000L * 1000)) * 1000);
+                case MICROS: return plusSeconds((amountToAdd / (1000000L * 1000)) * 1000).plusNanos((amountToAdd % (1000000L * 1000)) * 1000);
                 case MILLIS: return plusMillis(amountToAdd);
                 case SECONDS: return plusSeconds(amountToAdd);
             }
@@ -542,7 +544,7 @@ public final class Duration
      * @throws ArithmeticException if numeric overflow occurs
      */
     public Duration plusMillis(long millisToAdd) {
-        return plus(millisToAdd / 1000, (millisToAdd % 1000) * 1000_000);
+        return plus(millisToAdd / 1000, (millisToAdd % 1000) * 1000000);
     }
 
     /**
@@ -823,7 +825,7 @@ public final class Duration
      */
     public long toMillis() {
         long millis = Jdk8Methods.safeMultiply(seconds, 1000);
-        millis = Jdk8Methods.safeAdd(millis, nanos / 1000_000);
+        millis = Jdk8Methods.safeAdd(millis, nanos / 1000000);
         return millis;
     }
 
@@ -837,7 +839,7 @@ public final class Duration
      * @throws ArithmeticException if numeric overflow occurs
      */
     public long toNanos() {
-        long millis = Jdk8Methods.safeMultiply(seconds, 1000_000_000);
+        long millis = Jdk8Methods.safeMultiply(seconds, 1000000000);
         millis = Jdk8Methods.safeAdd(millis, nanos);
         return millis;
     }
@@ -853,7 +855,7 @@ public final class Duration
      * @return the comparator value, negative if less, positive if greater
      */
     public int compareTo(Duration otherDuration) {
-        int cmp = Long.compare(seconds, otherDuration.seconds);
+        int cmp = Jdk8Methods.compare(seconds, otherDuration.seconds);
         if (cmp != 0) {
             return cmp;
         }

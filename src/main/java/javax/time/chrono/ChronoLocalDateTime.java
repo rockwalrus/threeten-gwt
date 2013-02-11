@@ -45,6 +45,7 @@ import javax.time.calendrical.DateTime.WithAdjuster;
 import javax.time.calendrical.DateTimeField;
 import javax.time.calendrical.PeriodUnit;
 import javax.time.format.DateTimeFormatter;
+import javax.time.jdk8.Jdk8Methods;
 import javax.time.zone.ZoneRules;
 
 /**
@@ -95,9 +96,9 @@ public interface ChronoLocalDateTime<C extends Chrono<C>>
             new Comparator<ChronoLocalDateTime<?>>() {
         @Override
         public int compare(ChronoLocalDateTime<?> datetime1, ChronoLocalDateTime<?> datetime2) {
-            int cmp = Long.compare(datetime1.getDate().toEpochDay(), datetime2.getDate().toEpochDay());
+            int cmp = Jdk8Methods.compare(datetime1.getDate().toEpochDay(), datetime2.getDate().toEpochDay());
             if (cmp == 0) {
-                cmp = Long.compare(datetime1.getTime().toNanoOfDay(), datetime2.getTime().toNanoOfDay());
+                cmp = Jdk8Methods.compare(datetime1.getTime().toNanoOfDay(), datetime2.getTime().toNanoOfDay());
             }
             return cmp;
         }

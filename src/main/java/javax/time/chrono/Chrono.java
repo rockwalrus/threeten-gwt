@@ -142,8 +142,8 @@ public abstract class Chrono<C extends Chrono<C>> implements Comparable<Chrono<?
     private static final ConcurrentHashMap<String, Chrono<?>> CHRONOS_BY_TYPE;
     static {
         // TODO: defer initialization?
-        ConcurrentHashMap<String, Chrono<?>> ids = new ConcurrentHashMap<>();
-        ConcurrentHashMap<String, Chrono<?>> types = new ConcurrentHashMap<>();
+        ConcurrentHashMap<String, Chrono<?>> ids = new ConcurrentHashMap<String, Chrono<?>>();
+        ConcurrentHashMap<String, Chrono<?>> types = new ConcurrentHashMap<String, Chrono<?>>();
         @SuppressWarnings("rawtypes")
         ServiceLoader<Chrono> loader =  ServiceLoader.load(Chrono.class);
         for (Chrono<?> chrono : loader) {
@@ -192,7 +192,7 @@ public abstract class Chrono<C extends Chrono<C>> implements Comparable<Chrono<?
      */
     public static Chrono<?> ofLocale(Locale locale) {
         Objects.requireNonNull(locale, "locale");
-        String type = locale.getUnicodeLocaleType("ca");
+        String type = locale.getVariant();
         if (type == null) {
             return ISOChrono.INSTANCE;
         } else if ("iso".equals(type) || "iso8601".equals(type)) {
@@ -243,7 +243,7 @@ public abstract class Chrono<C extends Chrono<C>> implements Comparable<Chrono<?
      * @return the independent, modifiable set of the available chronology IDs, not null
      */
     public static Set<Chrono<?>> getAvailableChronologies() {
-        return new HashSet<>(CHRONOS_BY_ID.values());
+        return new HashSet<Chrono<?>>(CHRONOS_BY_ID.values());
     }
 
     //-----------------------------------------------------------------------

@@ -57,6 +57,7 @@ import javax.time.format.DateTimeFormatter;
 import javax.time.format.DateTimeFormatters;
 import javax.time.format.DateTimeParseException;
 import javax.time.jdk8.DefaultInterfaceDateTime;
+import javax.time.jdk8.Jdk8Methods;
 import javax.time.zone.ZoneRules;
 
 /**
@@ -99,9 +100,9 @@ public final class OffsetDateTime
     public static final Comparator<OffsetDateTime> INSTANT_COMPARATOR = new Comparator<OffsetDateTime>() {
         @Override
         public int compare(OffsetDateTime datetime1, OffsetDateTime datetime2) {
-            int cmp = Long.compare(datetime1.toEpochSecond(), datetime2.toEpochSecond());
+            int cmp = Jdk8Methods.compare(datetime1.toEpochSecond(), datetime2.toEpochSecond());
             if (cmp == 0) {
-                cmp = Long.compare(datetime1.getTime().toNanoOfDay(), datetime2.getTime().toNanoOfDay());
+                cmp = Jdk8Methods.compare(datetime1.getTime().toNanoOfDay(), datetime2.getTime().toNanoOfDay());
             }
             return cmp;
         }
@@ -1486,7 +1487,7 @@ public final class OffsetDateTime
         if (getOffset().equals(other.getOffset())) {
             return getDateTime().compareTo(other.getDateTime());
         }
-        int cmp = Long.compare(toEpochSecond(), other.toEpochSecond());
+        int cmp = Jdk8Methods.compare(toEpochSecond(), other.toEpochSecond());
         if (cmp == 0) {
             cmp = getTime().getNano() - other.getTime().getNano();
             if (cmp == 0) {

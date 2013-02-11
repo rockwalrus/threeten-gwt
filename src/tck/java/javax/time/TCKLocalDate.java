@@ -144,7 +144,7 @@ public class TCKLocalDate extends AbstractDateTimeTest {
 
     @Override
     protected List<DateTimeField> invalidFields() {
-        List<DateTimeField> list = new ArrayList<>(Arrays.<DateTimeField>asList(ChronoField.values()));
+        List<DateTimeField> list = new ArrayList<DateTimeField>(Arrays.<DateTimeField>asList(ChronoField.values()));
         list.removeAll(validFields());
         return list;
     }

@@ -75,7 +75,7 @@ final class DateTimeParseContext {
     /**
      * The list of parsed data.
      */
-    private final ArrayList<Parsed> parsed = new ArrayList<>();
+    private final ArrayList<Parsed> parsed = new ArrayList<Parsed>();
 
     /**
      * Creates a new instance of the context.
@@ -372,7 +372,7 @@ final class DateTimeParseContext {
      * Temporary store of parsed data.
      */
     private static final class Parsed {
-        final List<Object> parsed = new ArrayList<>();
+        final List<Object> parsed = new ArrayList<Object>();
         private Parsed() {
         }
         @Override

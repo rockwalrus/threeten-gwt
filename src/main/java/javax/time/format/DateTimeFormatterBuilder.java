@@ -109,7 +109,7 @@ public final class DateTimeFormatterBuilder {
     /**
      * The list of printers that will be used.
      */
-    private final List<DateTimePrinterParser> printerParsers = new ArrayList<>();
+    private final List<DateTimePrinterParser> printerParsers = new ArrayList<DateTimePrinterParser>();
     /**
      * Whether this builder produces an optional formatter.
      */
@@ -1094,7 +1094,7 @@ public final class DateTimeFormatterBuilder {
     }
 
     /** Map of letters to fields. */
-    private static final Map<Character, DateTimeField> FIELD_MAP = new HashMap<>();
+    private static final Map<Character, DateTimeField> FIELD_MAP = new HashMap<Character, DateTimeField>();
     static {
         FIELD_MAP.put('G', ChronoField.ERA);                       // Java, CLDR (different to both for 1/2 chars)
         FIELD_MAP.put('y', ChronoField.YEAR);                      // CLDR
@@ -2534,7 +2534,7 @@ public final class DateTimeFormatterBuilder {
                 synchronized (this) {
                     cached = cachedSubstringTree;
                     if (cached == null || cached.getKey() != regionIdsSize) {
-                        cachedSubstringTree = cached = new SimpleImmutableEntry<>(regionIdsSize, prepareParser(regionIds));
+                        cachedSubstringTree = cached = new SimpleImmutableEntry<Integer, SubstringTree>(regionIdsSize, prepareParser(regionIds));
                     }
                 }
             }
@@ -2593,7 +2593,7 @@ public final class DateTimeFormatterBuilder {
             /**
              * Map of a substring to a set of substrings that contain the key.
              */
-            private final Map<CharSequence, SubstringTree> substringMap = new HashMap<>();
+            private final Map<CharSequence, SubstringTree> substringMap = new HashMap<CharSequence, SubstringTree>();
 
             /**
              * Constructor.
@@ -2638,7 +2638,7 @@ public final class DateTimeFormatterBuilder {
          */
         private static SubstringTree prepareParser(Set<String> availableIDs) {
             // sort by length
-            List<String> ids = new ArrayList<>(availableIDs);
+            List<String> ids = new ArrayList<String>(availableIDs);
             Collections.sort(ids, LENGTH_SORT);
 
             // build the tree

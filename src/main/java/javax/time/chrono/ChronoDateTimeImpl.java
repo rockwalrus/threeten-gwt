@@ -107,11 +107,11 @@ final class ChronoDateTimeImpl<C extends Chrono<C>>
     /**
      * Microseconds per day.
      */
-    private static final long MICROS_PER_DAY = SECONDS_PER_DAY * 1000_000L;
+    private static final long MICROS_PER_DAY = SECONDS_PER_DAY * 1000000L;
     /**
      * Nanos per second.
      */
-    private static final long NANOS_PER_SECOND = 1000_000_000L;
+    private static final long NANOS_PER_SECOND = 1000000000L;
     /**
      * Nanos per minute.
      */
@@ -143,7 +143,7 @@ final class ChronoDateTimeImpl<C extends Chrono<C>>
      * @return the local date-time, not null
      */
     static <R extends Chrono<R>> ChronoDateTimeImpl<R> of(ChronoLocalDate<R> date, LocalTime time) {
-        return new ChronoDateTimeImpl<>(date, time);
+        return new ChronoDateTimeImpl<R>(date, time);
     }
 
     /**
@@ -173,7 +173,7 @@ final class ChronoDateTimeImpl<C extends Chrono<C>>
         }
         // Validate that the new DateTime is a ChronoLocalDate (and not something else)
         ChronoLocalDate<C> cd = date.getChrono().ensureChronoLocalDate(newDate);
-        return new ChronoDateTimeImpl<>(cd, newTime);
+        return new ChronoDateTimeImpl<C>(cd, newTime);
     }
 
     //-----------------------------------------------------------------------

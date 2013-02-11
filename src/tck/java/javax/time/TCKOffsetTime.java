@@ -133,7 +133,7 @@ public class TCKOffsetTime extends AbstractDateTimeTest {
 
     @Override
     protected List<DateTimeField> invalidFields() {
-        List<DateTimeField> list = new ArrayList<>(Arrays.<DateTimeField>asList(ChronoField.values()));
+        List<DateTimeField> list = new ArrayList<DateTimeField>(Arrays.<DateTimeField>asList(ChronoField.values()));
         list.removeAll(validFields());
         list.add(JulianDayField.JULIAN_DAY);
         list.add(JulianDayField.MODIFIED_JULIAN_DAY);

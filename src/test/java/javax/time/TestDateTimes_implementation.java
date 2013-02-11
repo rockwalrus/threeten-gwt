@@ -370,7 +370,16 @@ public class TestDateTimes_implementation {
             int a = values[i];
             for (int j = 0; j < values.length; j++) {
                 int b = values[j];
-                assertEquals(Integer.compare(a, b), a < b ? -1 : (a > b ? 1 : 0), a + " <=> " + b);
+                int compare = Jdk8Methods.compare(a, b);
+
+                if (a < b) {
+                    assertTrue(compare < 0, a + " <=> " + b);
+                } else if (a == b) {
+    		    assertEquals(compare, 0, a + " <=> " + b);
+                } else if (a > b) {
+                    assertTrue(compare > 0, a + " <=> " + b);
+                }
+
             }
         }
     }
@@ -402,7 +411,15 @@ public class TestDateTimes_implementation {
             long a = values[i];
             for (int j = 0; j < values.length; j++) {
                 long b = values[j];
-                assertEquals(Long.compare(a, b), a < b ? -1 : (a > b ? 1 : 0), a + " <=> " + b);
+                int compare = Jdk8Methods.compare(a, b);
+
+                if (a < b) {
+                    assertTrue(compare < 0, a + " <=> " + b);
+                } else if (a == b) {
+    		    assertEquals(compare, 0, a + " <=> " + b);
+                } else if (a > b) {
+                    assertTrue(compare > 0, a + " <=> " + b);
+                }
             }
         }
     }

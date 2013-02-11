@@ -79,14 +79,14 @@ public abstract class ZoneRulesProvider {
     /**
      * The set of loaded providers.
      */
-    private static final CopyOnWriteArrayList<ZoneRulesProvider> PROVIDERS = new CopyOnWriteArrayList<>();
+    private static final CopyOnWriteArrayList<ZoneRulesProvider> PROVIDERS = new CopyOnWriteArrayList<ZoneRulesProvider>();
     /**
      * The lookup from zone region ID to provider.
      */
-    private static final ConcurrentMap<String, ZoneRulesProvider> ZONES = new ConcurrentHashMap<>(512, 0.75f, 2);
+    private static final ConcurrentMap<String, ZoneRulesProvider> ZONES = new ConcurrentHashMap<String, ZoneRulesProvider>(512, 0.75f, 2);
     static {
         ServiceLoader<ZoneRulesProvider> sl = ServiceLoader.load(ZoneRulesProvider.class, ClassLoader.getSystemClassLoader());
-        List<ZoneRulesProvider> loaded = new ArrayList<>();
+        List<ZoneRulesProvider> loaded = new ArrayList<ZoneRulesProvider>();
         Iterator<ZoneRulesProvider> it = sl.iterator();
         while (it.hasNext()) {
             ZoneRulesProvider provider;
@@ -113,7 +113,7 @@ public abstract class ZoneRulesProvider {
      * @return a modifiable copy of the set of zone IDs, not null
      */
     public static Set<String> getAvailableZoneIds() {
-        return new HashSet<>(ZONES.keySet());
+        return new HashSet<String>(ZONES.keySet());
     }
 
     /**
@@ -358,7 +358,7 @@ public abstract class ZoneRulesProvider {
 
         @Override
         protected Set<String> provideZoneIds() {
-            return new HashSet<>(Collections.singleton(zoneId));
+            return new HashSet<String>(Collections.singleton(zoneId));
         }
 
         @Override

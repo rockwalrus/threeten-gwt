@@ -208,7 +208,10 @@ public class TestOffsetDateTime_instants {
                 if (expected.getDate().equals(maxDate) == false) {
                     expected = expected.plusDays(1);
                 }
-            } catch (RuntimeException|Error ex) {
+            } catch (RuntimeException ex) {
+                System.out.println("Error: " + i + " " + expected);
+                throw ex;
+            } catch (Error ex) {
                 System.out.println("Error: " + i + " " + expected);
                 throw ex;
             }

@@ -1166,7 +1166,7 @@ public class TCKDateTimeFormatters {
 
     //-------------------------------------------------------------------------
     static class MockAccessor extends DefaultInterfaceDateTimeAccessor {
-        Map<DateTimeField, Long> fields = new HashMap<>();
+        Map<DateTimeField, Long> fields = new HashMap<DateTimeField, Long>();
         ZoneId zoneId;
 
         void setFields(LocalDate dt) {

@@ -131,7 +131,7 @@ public final class WeekDefinition implements Serializable {
     /**
      * The cache of rules by locale.
      */
-    private static final ConcurrentMap<String, WeekDefinition> CACHE = new ConcurrentHashMap<>(4, 0.75f, 2);
+    private static final ConcurrentMap<String, WeekDefinition> CACHE = new ConcurrentHashMap<String, WeekDefinition>(4, 0.75f, 2);
 
     /**
      * The first day-of-week.
@@ -534,7 +534,7 @@ public final class WeekDefinition implements Serializable {
         //-------------------------------------------------------------------------
         @Override
         public int compare(DateTimeAccessor dateTime1, DateTimeAccessor dateTime2) {
-            return Long.compare(dateTime1.getLong(this), dateTime2.getLong(this));
+            return Jdk8Methods.compare(dateTime1.getLong(this), dateTime2.getLong(this));
         }
 
         //-----------------------------------------------------------------------

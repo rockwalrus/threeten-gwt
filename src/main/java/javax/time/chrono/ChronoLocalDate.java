@@ -43,6 +43,7 @@ import javax.time.calendrical.DateTimeAccessor;
 import javax.time.calendrical.DateTimeField;
 import javax.time.calendrical.PeriodUnit;
 import javax.time.format.DateTimeFormatter;
+import javax.time.jdk8.Jdk8Methods;
 
 /**
  * A date without time-of-day or time-zone in an arbitrary chronology, intended
@@ -224,7 +225,7 @@ public interface ChronoLocalDate<C extends Chrono<C>>
             new Comparator<ChronoLocalDate<?>>() {
         @Override
         public int compare(ChronoLocalDate<?> date1, ChronoLocalDate<?> date2) {
-            return Long.compare(date1.toEpochDay(), date2.toEpochDay());
+            return Jdk8Methods.compare(date1.toEpochDay(), date2.toEpochDay());
         }
     };
 

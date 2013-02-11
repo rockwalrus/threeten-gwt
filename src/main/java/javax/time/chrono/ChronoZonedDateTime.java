@@ -44,6 +44,7 @@ import javax.time.calendrical.DateTime;
 import javax.time.calendrical.DateTimeField;
 import javax.time.calendrical.PeriodUnit;
 import javax.time.format.DateTimeFormatter;
+import javax.time.jdk8.Jdk8Methods;
 
 /**
  * A date-time with a time-zone in an arbitrary chronology,
@@ -92,9 +93,9 @@ public interface ChronoZonedDateTime<C extends Chrono<C>>
     Comparator<ChronoZonedDateTime<?>> INSTANT_COMPARATOR = new Comparator<ChronoZonedDateTime<?>>() {
         @Override
         public int compare(ChronoZonedDateTime<?> datetime1, ChronoZonedDateTime<?> datetime2) {
-            int cmp = Long.compare(datetime1.toEpochSecond(), datetime2.toEpochSecond());
+            int cmp = Jdk8Methods.compare(datetime1.toEpochSecond(), datetime2.toEpochSecond());
             if (cmp == 0) {
-                cmp = Long.compare(datetime1.getTime().toNanoOfDay(), datetime2.getTime().toNanoOfDay());
+                cmp = Jdk8Methods.compare(datetime1.getTime().toNanoOfDay(), datetime2.getTime().toNanoOfDay());
             }
             return cmp;
         }

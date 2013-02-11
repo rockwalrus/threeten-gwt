@@ -132,7 +132,7 @@ public abstract class DefaultInterfaceChronoLocalDate<C extends Chrono<C>>
     //-------------------------------------------------------------------------
     @Override
     public int compareTo(ChronoLocalDate<?> other) {
-        int cmp = Long.compare(toEpochDay(), other.toEpochDay());
+        int cmp = Jdk8Methods.compare(toEpochDay(), other.toEpochDay());
         if (cmp == 0) {
             cmp = getChrono().compareTo(other.getChrono());
         }

@@ -298,4 +298,25 @@ public final class Jdk8Methods {
         return ((a % b) + b) % b;
     }
 
+    public static int compare(byte val, byte to) {
+	return val - to;
+    }
+
+    public static int compare(int val, int to) {
+	int mask = (val ^ to) & 0x80000000;
+	return  (mask >>> 31)  | val & mask | ~mask & (val - to);
+    }
+
+    public static int compare(long val, long to) {
+	long mask = (val ^ to) & 0x8000000000000000l;
+	long c =  (mask >>> 63)  | val & mask | ~mask & (val - to);
+
+	int top = (int) (c >> 32);
+	int bottom = (int) c;
+
+	char topNibble = (char) (bottom >> 16);
+	char bottomNibble = (char) bottom;
+
+	return top | topNibble | bottomNibble;
+    }
 }

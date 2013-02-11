@@ -159,7 +159,7 @@ public abstract class DefaultInterfaceChronoZonedDateTime<C extends Chrono<C>>
     //-------------------------------------------------------------------------
     @Override
     public int compareTo(ChronoZonedDateTime<?> other) {
-        int cmp = Long.compare(toEpochSecond(), other.toEpochSecond());
+        int cmp = Jdk8Methods.compare(toEpochSecond(), other.toEpochSecond());
         if (cmp == 0) {
             cmp = getTime().getNano() - other.getTime().getNano();
             if (cmp == 0) {

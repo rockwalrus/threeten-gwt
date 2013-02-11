@@ -41,6 +41,7 @@ import javax.time.calendrical.DateTime;
 import javax.time.calendrical.DateTime.MinusAdjuster;
 import javax.time.calendrical.DateTime.PlusAdjuster;
 import javax.time.calendrical.PeriodUnit;
+import javax.time.jdk8.Jdk8Methods;
 
 /**
  * Mock period of time measured using a single unit, such as {@code 3 Days}.
@@ -115,7 +116,7 @@ public final class MockSimplePeriod
         if (unit.equals(otherPeriod.getUnit()) == false) {
             throw new IllegalArgumentException("Units cannot be compared: " + unit + " and " + otherPeriod.getUnit());
         }
-        return Long.compare(amount, otherPeriod.amount);
+        return Jdk8Methods.compare(amount, otherPeriod.amount);
     }
 
     @Override

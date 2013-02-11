@@ -230,7 +230,7 @@ public class TestChronoZonedDateTime {
     //-----------------------------------------------------------------------
     @Test(groups={"tck"}, dataProvider="calendars")
     public void test_zonedDateTime_comparisons(Chrono chrono) {
-        List<ChronoZonedDateTime<?>> dates = new ArrayList<>();
+        List<ChronoZonedDateTime<?>> dates = new ArrayList<ChronoZonedDateTime<?>>();
 
         ChronoZonedDateTime<?> date = chrono.date(LocalDate.of(1900, 1, 1))
                 .atTime(LocalTime.MIN_TIME)
@@ -259,7 +259,7 @@ public class TestChronoZonedDateTime {
 
         // Check these dates against the corresponding dates for every calendar
         for (Chrono[] clist : data_of_calendars()) {
-            List<ChronoZonedDateTime<?>> otherDates = new ArrayList<>();
+            List<ChronoZonedDateTime<?>> otherDates = new ArrayList<ChronoZonedDateTime<?>>();
             Chrono chrono2 = ISOChrono.INSTANCE; //clist[0];
             for (ChronoZonedDateTime<?> d : dates) {
                 otherDates.add(chrono2.date(d).atTime(d.getTime()).atZone(d.getZone()));

@@ -182,7 +182,7 @@ public enum JulianDayField implements DateTimeField {
 
     @Override
     public int compare(DateTimeAccessor dateTime1, DateTimeAccessor dateTime2) {
-        return Long.compare(dateTime1.getLong(this), dateTime2.getLong(this));
+        return Jdk8Methods.compare(dateTime1.getLong(this), dateTime2.getLong(this));
     }
 
     //-----------------------------------------------------------------------

@@ -70,12 +70,18 @@ public abstract class AbstractTest {
 
     protected static Object writeThenRead(Object o) throws IOException, ClassNotFoundException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try (ObjectOutputStream oos = new ObjectOutputStream(baos) ) {
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        try {
             oos.writeObject(o);
+        } finally {
+            oos.close();
         }
 
-        try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(baos.toByteArray()))) {
+        ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(baos.toByteArray()));
+        try {
             return ois.readObject();
+        } finally {
+            ois.close();
         }
     }
 
@@ -89,9 +95,12 @@ public abstract class AbstractTest {
 //            out.writeObject(objectSerialised);
 //        }
 
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(SERIALISATION_DATA_FOLDER + className + ".bin"))) {
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(SERIALISATION_DATA_FOLDER + className + ".bin"));
+        try {
             Object objectFromFile = in.readObject();
             assertEquals(objectFromFile, objectSerialised);
+        } finally {
+            in.close();
         }
     }
 

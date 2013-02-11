@@ -102,11 +102,11 @@ public final class LocalDate
     /**
      * The minimum supported year for instances of {@code LocalDate}, -999,999,999.
      */
-    public static final int MIN_YEAR = -999_999_999;
+    public static final int MIN_YEAR = -999999999;
     /**
      * The maximum supported year for instances of {@code LocalDate}, 999,999,999.
      */
-    public static final int MAX_YEAR = 999_999_999;
+    public static final int MAX_YEAR = 999999999;
     /**
      * The minimum supported {@code LocalDate}, -999999999-01-01.
      * This could be used by an application as a "far past" date.

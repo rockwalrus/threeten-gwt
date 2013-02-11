@@ -57,6 +57,7 @@ import javax.time.format.DateTimeFormatter;
 import javax.time.format.DateTimeFormatters;
 import javax.time.format.DateTimeParseException;
 import javax.time.jdk8.DefaultInterfaceDateTimeAccessor;
+import javax.time.jdk8.Jdk8Methods;
 import javax.time.zone.ZoneRules;
 
 /**
@@ -834,7 +835,7 @@ public final class OffsetTime
             switch ((ChronoUnit) unit) {
                 case NANOS: return nanosUntil;
                 case MICROS: return nanosUntil / 1000;
-                case MILLIS: return nanosUntil / 1000_000;
+                case MILLIS: return nanosUntil / 1000000;
                 case SECONDS: return nanosUntil / NANOS_PER_SECOND;
                 case MINUTES: return nanosUntil / NANOS_PER_MINUTE;
                 case HOURS: return nanosUntil / NANOS_PER_HOUR;
@@ -900,7 +901,7 @@ public final class OffsetTime
         if (offset.equals(other.offset)) {
             return time.compareTo(other.time);
         }
-        int compare = Long.compare(toEpochNano(), other.toEpochNano());
+        int compare = Jdk8Methods.compare(toEpochNano(), other.toEpochNano());
         if (compare == 0) {
             compare = time.compareTo(other.time);
         }

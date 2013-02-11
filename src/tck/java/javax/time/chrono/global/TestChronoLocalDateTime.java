@@ -227,7 +227,7 @@ public class TestChronoLocalDateTime {
     //-----------------------------------------------------------------------
     @Test(groups={"tck"}, dataProvider="calendars")
     public void test_datetime_comparisons(Chrono chrono) {
-        List<ChronoLocalDateTime<?>> dates = new ArrayList<>();
+        List<ChronoLocalDateTime<?>> dates = new ArrayList<ChronoLocalDateTime<?>>();
 
         ChronoLocalDateTime<?> date = chrono.date(LocalDate.of(1900, 1, 1)).atTime(LocalTime.MIN_TIME);
 
@@ -254,7 +254,7 @@ public class TestChronoLocalDateTime {
 
         // Check these dates against the corresponding dates for every calendar
         for (Chrono[] clist : data_of_calendars()) {
-            List<ChronoLocalDateTime<?>> otherDates = new ArrayList<>();
+            List<ChronoLocalDateTime<?>> otherDates = new ArrayList<ChronoLocalDateTime<?>>();
             Chrono chrono2 = clist[0];
             for (ChronoLocalDateTime<?> d : dates) {
                 otherDates.add(chrono2.date(d).atTime(d.getTime()));

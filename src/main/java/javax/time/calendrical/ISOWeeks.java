@@ -227,7 +227,7 @@ public final class ISOWeeks {
         //-------------------------------------------------------------------------
         @Override
         public int compare(DateTimeAccessor dateTime1, DateTimeAccessor dateTime2) {
-            return Long.compare(dateTime1.getLong(this), dateTime2.getLong(this));
+            return Jdk8Methods.compare(dateTime1.getLong(this), dateTime2.getLong(this));
         }
 
         private static DateTimeValueRange getWeekRange(LocalDate date) {

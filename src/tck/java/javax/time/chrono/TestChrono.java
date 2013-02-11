@@ -149,7 +149,7 @@ public class TestChrono {
 
     @Test(dataProvider = "calendarsystemtype", groups="tck")
     public void test_lookupLocale(Chrono<?> chrono, String calendarType) {
-        Locale locale = new Locale.Builder().setLanguage("en").setRegion("CA").setUnicodeLocaleKeyword("ca", calendarType).build();
+        Locale locale = new Locale("en", "CA", calendarType);
         assertEquals(Chrono.ofLocale(locale), chrono);
     }
 

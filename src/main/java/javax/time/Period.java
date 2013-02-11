@@ -150,7 +150,7 @@ public final class Period
             return ZERO;
         }
         long totSecs = Jdk8Methods.safeAdd(hours * 3600L, minutes * 60L) + seconds;
-        long totNanos = Jdk8Methods.safeAdd(Jdk8Methods.safeMultiply(totSecs, 1_000_000_000L), nanos);
+        long totNanos = Jdk8Methods.safeAdd(Jdk8Methods.safeMultiply(totSecs, 1000000000L), nanos);
         return create(years, months, days, totNanos);
     }
 
@@ -667,7 +667,7 @@ public final class Period
                 switch((ChronoUnit) unit) {
                     case NANOS: return plusNanos(amount);
                     case MICROS: return plusNanos(Jdk8Methods.safeMultiply(amount, 1000L));
-                    case MILLIS: return plusNanos(Jdk8Methods.safeMultiply(amount, 1000_000L));
+                    case MILLIS: return plusNanos(Jdk8Methods.safeMultiply(amount, 1000000L));
                     case SECONDS: return plusSeconds(amount);
                     case MINUTES: return plusMinutes(amount);
                     case HOURS: return plusHours(amount);
@@ -1120,7 +1120,7 @@ public final class Period
                     buf.append(secondPart);
                     if (nanoPart != 0) {
                         int dotPos = buf.length();
-                        nanoPart += 1000_000_000;
+                        nanoPart += 1000000000;
                         while (nanoPart % 10 == 0) {
                             nanoPart /= 10;
                         }

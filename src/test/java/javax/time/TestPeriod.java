@@ -265,15 +265,15 @@ public class TestPeriod {
         assertPeriod(Period.of(0, NANOS), 0, 0, 0, 0, 0, 0, 0);
         assertPeriod(Period.of(-1, NANOS), 0, 0, 0, 0, 0, 0, -1);
         assertPeriod(Period.of(Long.MAX_VALUE, NANOS), 0, 0, 0,
-                        (int) (Long.MAX_VALUE / 3600_000_000_000L),
-                        (int) ((Long.MAX_VALUE / 60_000_000_000L) % 60),
-                        (int) ((Long.MAX_VALUE / 1_000_000_000L) % 60),
-                        Long.MAX_VALUE % 1_000_000_000L);
+                        (int) (Long.MAX_VALUE / 3600000000000L),
+                        (int) ((Long.MAX_VALUE / 60000000000L) % 60),
+                        (int) ((Long.MAX_VALUE / 1000000000L) % 60),
+                        Long.MAX_VALUE % 1000000000L);
         assertPeriod(Period.of(Long.MIN_VALUE, NANOS), 0, 0, 0,
-                        (int) (Long.MIN_VALUE / 3600_000_000_000L),
-                        (int) ((Long.MIN_VALUE / 60_000_000_000L) % 60),
-                        (int) ((Long.MIN_VALUE / 1_000_000_000L) % 60),
-                        Long.MIN_VALUE % 1_000_000_000L);
+                        (int) (Long.MIN_VALUE / 3600000000000L),
+                        (int) ((Long.MIN_VALUE / 60000000000L) % 60),
+                        (int) ((Long.MIN_VALUE / 1000000000L) % 60),
+                        Long.MIN_VALUE % 1000000000L);
     }
 
     //-----------------------------------------------------------------------
@@ -619,7 +619,7 @@ public class TestPeriod {
 
     public void test_withNanos_noChange() {
         Period test = Period.of(1, 2, 3, 4, 5, 6, 7);
-        assertSame(test.withTimeNanos(((4 * 60 + 5) * 60 + 6) * 1_000_000_000L + 7), test);
+        assertSame(test.withTimeNanos(((4 * 60 + 5) * 60 + 6) * 1000000000L + 7), test);
     }
 
     public void test_withNanos_toZero() {
@@ -1191,13 +1191,13 @@ public class TestPeriod {
 
     @Test(expectedExceptions=ArithmeticException.class)
     public void test_normalizedDaysToHours_min() {
-        Period base = Period.of(0, 0, -1_000, -10_000_000, 0, 0, 0);
+        Period base = Period.of(0, 0, -1000, -10000000, 0, 0, 0);
         base.normalizedDaysToHours();
     }
 
     @Test(expectedExceptions=ArithmeticException.class)
     public void test_normalizedDaysToHours_max() {
-        Period base = Period.of(0, 0, 1_000, 10_000_000, 0, 0, 0);
+        Period base = Period.of(0, 0, 1000, 10000000, 0, 0, 0);
         base.normalizedDaysToHours();
     }
 
@@ -1518,7 +1518,7 @@ public class TestPeriod {
         assertEquals(test.getMinutes(), mn, "mins");
         assertEquals(test.getSeconds(), s, "secs");
         assertEquals(test.getNanos(), n, "nanos");
-        assertEquals(test.getTimeNanos(), (((h * 60L + mn) * 60 + s) * 1_000_000_000L + n), "total nanos");
+        assertEquals(test.getTimeNanos(), (((h * 60L + mn) * 60 + s) * 1000000000L + n), "total nanos");
     }
 
     private static Period pymd(int y, int m, int d) {

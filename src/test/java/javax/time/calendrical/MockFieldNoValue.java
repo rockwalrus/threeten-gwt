@@ -35,6 +35,7 @@ import static javax.time.calendrical.ChronoUnit.MONTHS;
 import static javax.time.calendrical.ChronoUnit.WEEKS;
 
 import javax.time.DateTimeException;
+import javax.time.jdk8.Jdk8Methods;
 
 /**
  * Mock DateTimeField that returns null.
@@ -65,7 +66,7 @@ public enum MockFieldNoValue implements DateTimeField {
 
     @Override
     public int compare(DateTimeAccessor dateTime1, DateTimeAccessor dateTime2) {
-        return Long.compare(doGet(dateTime1), doGet(dateTime2));
+        return Jdk8Methods.compare(doGet(dateTime1), doGet(dateTime2));
     }
 
     //-----------------------------------------------------------------------
